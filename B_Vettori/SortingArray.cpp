@@ -46,6 +46,15 @@ void stampaVettore(string vs[], int l) {
     cout << endl;
 }
 
+void bubbleSort(string arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                swap(arr, j, j+1);
+            }
+        }
+    }
+}
 void quickSort(string arr[], int low, int high){
     if(low < high){
         string pivot = arr[high];
@@ -76,6 +85,7 @@ int main()
     numeroscambi = 0;
 
     quickSort(vs, 0, n-1);
+    bubbleSort(vs, n);
     cout << "Eseguiti " << numeroscambi << " confronti." << endl;
     stampaVettore(vs, n);
 
