@@ -23,6 +23,7 @@ int main()
     Bicicletta x(16,"verdino");
     Bicicletta y(14,"rossastro");
 
+
     x.presentati();
     y.presentati();
 
