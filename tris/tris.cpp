@@ -1,97 +1,139 @@
-
 #include <iostream>
 using namespace std;
 
 class Tris
 {
 public:
-    int griglia[3][3];
+    char griglia[3][3];
+    bool turnoGiocatore1;
 
-    void reset_tabella()
+public:
+    Tris()
+    {
+        resettaGriglia();
+        turnoGiocatore1 = true;
+    }
+
+    void resettaGriglia()
     {
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                griglia[i][j] = 0;
+                griglia[i][j] = '-';
             }
         }
     }
 
-    void stampa_griglia()
+    void stampaGriglia()
     {
-        for (int j = 0; j < 3; j++)
+        cout << "-------------" << endl;
+        for (int i = 0; i < 3; i++)
         {
-            for (int i = 0; i < 3; i++)
+            cout << "| ";
+            for (int j = 0; j < 3; j++)
             {
-                cout << griglia[i][j] << "\t";
+                cout << griglia[i][j] << " | ";
             }
             cout << endl;
+            cout << "-------------" << endl;
         }
-        
     }
-    bool giocatore_uno(int x, int y)
+
+    bool mossa(int riga, int colonna)
     {
-        if (x > 2 || x < 0)
+        if (riga < 0 || riga > 2 || colonna < 0 || colonna > 2)
+        {
+            cout << "Mossa non valida! Inserisci coordinate valide." << endl;
             return false;
+        }
+        if (griglia[riga][colonna] != '-')
+        {
+            cout << "Cella già occupata! Scegli un'altra mossa." << endl;
+            return false;
+        }
 
-        if (y > 2 || y < 0)
-            return false;
+        if (turnoGiocatore1)
+            griglia[riga][colonna] = 'X';
+        else
+            griglia[riga][colonna] = 'O';
 
-        if (griglia[x][y] == 1 || griglia[x][y] == 2)
-            return false;
-        griglia[x][y] = 1;
+        turnoGiocatore1 = !turnoGiocatore1; // Cambia turno
         return true;
     }
-    bool giocatore_due(int x, int y)
+
+    bool controllaVittoria()
     {
-    
-        if (x > 2 || x < 0)
-            return false;
+        // Controlla righe, colonne e diagonali per la vittoria
+        for (int i = 0; i < 3; i++)
+        {
+            if (griglia[i][0] != '-' && griglia[i][0] == griglia[i][1] && griglia[i][1] == griglia[i][2])
+                return true;
+            if (griglia[0][i] != '-' && griglia[0][i] == griglia[1][i] && griglia[1][i] == griglia[2][i])
+                return true;
+        }
+        if (griglia[0][0] != '-' && griglia[0][0] == griglia[1][1] && griglia[1][1] == griglia[2][2])
+            return true;
+        if (griglia[0][2] != '-' && griglia[0][2] == griglia[1][1] && griglia[1][1] == griglia[2][0])
+            return true;
 
-        if (y > 2 || y < 0)
-            return false;
-
-        if (griglia[x][y] == 1 || griglia[x][y] == 2)
-            return false;
-        griglia[x][y] = 2;
-        return true;
+        return false;
     }
-    
+
+    bool isGrigliaPiena()
+    {
+        // Controlla se la griglia è piena
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (griglia[i][j] == '-')
+                    return false; // Se c'è una cella vuota, la griglia non è piena
+            }
+        }
+        return true; // Griglia piena
+    }
 };
 
 int main()
 {
-    Tris myTris;
-    myTris.reset_tabella();
+    Tris partita;
+    int riga, colonna;
 
-    cout << "Stato iniziale!" << endl;
-    myTris.stampa_griglia();
-    int x, y;
-    bool mossa_valida;
-    do
+    cout << "Benvenuto nel gioco del Tris!" << endl;
+
+    while (true)
     {
-        cout << "Mossa del giocatore 1." << endl;
-        cout << "x: ";
-        cin >> x;
-        cout << "y: ";
-        cin >> y;
+        partita.stampaGriglia();
 
-        mossa_valida = myTris.giocatore_uno(x, y);
+        // Ottieni la mossa del giocatore corrente
+        if (partita.turnoGiocatore1)
+            cout << "Turno del Giocatore 1 (X): ";
+        else
+            cout << "Turno del Giocatore 2 (O): ";
 
-    } while (!mossa_valida);
+        cout << "Inserisci riga e colonna (0-2): ";
+        cin >> riga >> colonna;
 
-    do
-    {
-        cout << "Mossa del giocatore 2." << endl;
-        cout << "x: ";
-        cin >> x;
-        cout << "y: ";
-        cin >> y;
+        if (partita.mossa(riga, colonna))
+        {
+            if (partita.controllaVittoria())
+            {
+                partita.stampaGriglia();
+                if (partita.turnoGiocatore1)
+                    cout << "Il Giocatore 1 (X) vince!" << endl;
+                else
+                    cout << "Il Giocatore 2 (O) vince!" << endl;
+                break;
+            }
+            else if (partita.isGrigliaPiena())
+            {
+                partita.stampaGriglia();
+                cout << "Pareggio!" << endl;
+                break;
+            }
+        }
+    }
 
-        mossa_valida = myTris.giocatore_due(x, y);
-
-    } while (!mossa_valida);
-    myTris.stampa_griglia();
     return 0;
 }
