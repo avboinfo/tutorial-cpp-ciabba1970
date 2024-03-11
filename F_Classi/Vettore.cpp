@@ -1,4 +1,6 @@
-#include <iostream> 
+// riccardo sabattini
+
+#include <iostream>
 using namespace std;
 
 class Vettore {
@@ -8,24 +10,32 @@ protected:
 public:
     Vettore(int dim, int delta) {
         this->dim = dim;
-        this->delta = delta; 
+        this->delta = delta;
         len = 0;
         v = new int[dim];
     }
 
     void add(int n){
         if(len == dim) {
-            cout << "estendo da " << dim << " a " << dim+delta << endl;
             int *nuovov = new int[dim + delta];
             for(int i = 0; i < dim; i++) nuovov[i] = v[i];
             dim += delta;
             delete[] v; 
-
             v = nuovov;
         }
         v[len] = n;
         len++;
     }
+    int getElement(int index){
+        return v[index];
+
+    }
+    int setElement(int index, int newvalue){
+        return v[index] = newvalue;
+
+    }
+
+
 
     void print(){
         cout << "contenuto del vettore:";
@@ -40,6 +50,9 @@ public:
 
 int main(int argc, char * argv[]){
     Vettore vett(10, 2);
-    for(int i = 0; i < 15; i++) vett.add(33 * i);
+    for(int i = 0; i < 100; i++) vett.add(33 * i);
+    cout << vett.getElement(10) << endl;
+    vett.setElement(10,333);
     vett.print();
+
 }
