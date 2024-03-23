@@ -13,7 +13,7 @@
 
     first.nuova_giocata();
     first.risultato_mossa();
-
+   
 
 
 
