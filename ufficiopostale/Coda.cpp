@@ -30,7 +30,7 @@ class Coda{
     void stampa() {
         cout << "elementi in coda:" << name << ":" << endl;
 
-        for(int i = start; i < stop; i++) cout <<v[i] << " " <<;
+        for(int i = start; i < stop; i++) cout <<v[i] << " ";
         cout << "-----------------------" << endl;
     }
 
