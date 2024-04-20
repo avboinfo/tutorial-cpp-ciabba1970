@@ -1,9 +1,3 @@
-/*
- * BattleShipOne - Una battaglia navale contro il computer sulla costa
- * Author: Sandro Gallo
- * Date: 4 december 2020
- * Help sui codici nella mappa: 0-empty, 1-ship, 2-bomb, 3-strike
-*/
 
 #include <iostream>
 #include <cstdlib>
