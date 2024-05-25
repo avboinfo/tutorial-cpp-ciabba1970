@@ -3,7 +3,7 @@
 
 using namespace std;
 
-char getShiftedChar(char c) {
+char ciao(char c) {
     string keyboard = "qwertyuiopasdfghjklzxcvbnm";
     size_t pos = keyboard.find(c);
     if (pos == string::npos) {
@@ -17,7 +17,7 @@ int main() {
     cin >> N;
     cin >> S;
     for (char c : S) {
-        cout << getShiftedChar(c);
+        cout << ciao(c);
     }
     
     return 0;

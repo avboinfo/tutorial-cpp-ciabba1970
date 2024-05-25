@@ -61,7 +61,5 @@ int main() {
         fprintf(output, "%s", "Il giro veloce lo ha fatto Hamilton \n");
     else
         fprintf(output, "%s","Il giro veloce lo ha fatto Verstappen \n");
-
-    // insert your code here
     return 0;
 }
