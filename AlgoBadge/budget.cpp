@@ -10,7 +10,7 @@ int main() {
     cin >> n >> b;
 
     int tutti_i_prezzi[MAX_N];
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         cin >> tutti_i_prezzi[i];
     }
     
@@ -35,7 +35,7 @@ int main() {
         }
     }
     
-    for (const int& prezzo : result) {
+    for (const int & prezzo : result) {
         cout << prezzo << endl;
     }
     
