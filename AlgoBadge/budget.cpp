@@ -15,27 +15,27 @@ int main() {
     }
     
     vector<int> massima_spesa_possibile(b + 1, 0);
-    vector<vector<bool>> used(n, vector<bool>(b + 1, false));
+    vector<vector<bool>> piattousato(n, vector<bool>(b + 1, false));
 
     for (int i = 0; i < n; i++) {
         for (int j = b; j >= tutti_i_prezzi[i]; j--) {
             if (massima_spesa_possibile[j - tutti_i_prezzi[i]] + tutti_i_prezzi[i] > massima_spesa_possibile[j]) {
                 massima_spesa_possibile[j] = massima_spesa_possibile[j - tutti_i_prezzi[i]] + tutti_i_prezzi[i];
-                used[i][j] = true;
+                piattousato[i][j] = true;
             }
         }
     }
     
-    vector<int> result;
+    vector<int> ris;
     int budget_che_rimane = b;
     for (int i = n - 1; i >= 0 && budget_che_rimane > 0; i--) {
-        if (used[i][budget_che_rimane]) {
-            result.push_back(tutti_i_prezzi[i]);
+        if (piattousato[i][budget_che_rimane]) {
+            ris.push_back(tutti_i_prezzi[i]);
             budget_che_rimane -= tutti_i_prezzi[i];
         }
     }
     
-    for (const int & prezzo : result) {
+    for (const int & prezzo : ris) {
         cout << prezzo << endl;
     }
     
