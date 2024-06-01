@@ -1,4 +1,5 @@
-
+// primo commento, ma se faccio qualcosa tipo: 
+//dal budget massimo, io sottraggo ogni singola volta i valori più alti ma che non superano il budget
 #include <iostream>
 #include <vector>
 
@@ -40,3 +41,11 @@ int main() {
     return 0;
 }
 
+/*
+- n: memorizza il numero di piatti inserito dall'utente.
+- b: contiene il budget massimo inserito dall'utente.
+- prezzi: è un vettore che memorizza i prezzi dei singoli piatti.
+- piatti_scelti: è un vettore che tiene traccia dei prezzi dei piatti scelti.
+- spesa_totale: tiene conto della spesa totale dei piatti selezionati.
+- miglior_piatto: memorizza il piatto con il prezzo + alto.
+*/
